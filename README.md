@@ -4,14 +4,16 @@ puppet-symfony
 Introduction
 ------------
 
-This [Puppet](https://puppetlabs.com/) module installs adds support for Symfony2 applications.
+This [Puppet](https://puppetlabs.com/) module adds support for Symfony2 applications.
 
 Installation
 ------------
 
-Get the module
+Get the module:
 
-    git clone git://github.com/ddeboer/puppet-symfony.git modules/symfony
+```bash
+$ git clone git://github.com/ddeboer/puppet-symfony.git modules/symfony
+```
 
 Usage
 -----
