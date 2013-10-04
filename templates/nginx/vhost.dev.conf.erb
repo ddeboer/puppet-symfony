@@ -1,0 +1,29 @@
+server {
+    listen 80;
+    server_name <%= @vhost %>;
+    root <%= @vhostDir %>/web;
+    index app_dev.php;
+    access_log <%= @vhostDir %>/app/logs/access.log;
+    error_log <%= @vhostDir %>/app/logs/error.log;
+
+    location  /favicon.ico {
+        return 204;
+        break;
+    }
+
+    location / {
+        index app.php;
+        try_files $uri @rewriteindex;
+    }
+
+    location @rewriteindex {
+        rewrite ^(.*)$ /app.php/$1 last;
+    }
+
+    location ~ ^/(app|app_dev)\.php(/|$) {
+        fastcgi_pass    unix:/tmp/php5-fpm.sock;
+        fastcgi_split_path_info ^(.+\.php)(/.*)$;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    }
+}
